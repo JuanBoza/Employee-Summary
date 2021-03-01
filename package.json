@@ -6,9 +6,7 @@
     "directories": {
         "lib": "lib",
         "test": "test"
-    },
-    "scripts": {
-        "test": "jest --verbose test/*"
+
     },
     "repository": {
         "type": "git",
@@ -25,5 +23,8 @@
     },
     "devDependencies": {
         "jest": "^24.8.0"
+    },
+    "scripts": {
+        "start": "node app.js"
     }
 }
