@@ -35,10 +35,19 @@ inquirer.prompt([
         message: "Office Number", 
         name: "Office Number", 
         default: "1"
+    }, 
+    {
+        type: "list", 
+        message: "add additional members?",
+        name: 'add', 
+        choices: ['yes', 'no'], 
+    },
+
     
-}]).then(function(managerAnswers){
+]).then(function(managerAnswers){
     const manager = new Manager(managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.officeNumber);
     employees.push(manager);
+
 
 
 makeNewEmployees()
@@ -53,7 +62,9 @@ inquirer.prompt([{
     choices: [
         'Engineer',
         'Intern',
+        'No more employees'
     ], 
+    default: "No more employees"
 
 }]).then(function(typeAnswers){
     if(typeAnswers.type === "Engineer"){
@@ -118,7 +129,9 @@ inquirer.prompt([{
                 employees.push(intern);
                 makeNewEmployees()
          });
-        } else {
+
+        
+          } else {
             const html = render(employees); 
             fs.writefile(outputPath, html, function(err){
                 if (err)
@@ -129,7 +142,9 @@ inquirer.prompt([{
         
        
        });
-       }
+       } 
+
+
 
 
 
