@@ -39,10 +39,11 @@ inquirer.prompt([
 }]).then(function(managerAnswers){
     const manager = new Manager(managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.officeNumber);
     employees.push(manager);
-}
+
 
 makeNewEmployees()
 
+}); 
 function makeNewEmployees(){
 inquirer.prompt([{
 
@@ -80,7 +81,57 @@ inquirer.prompt([{
             message: "engineers github", 
             name: "github", 
             default: "github.com"
-        }
+        
+            }]).then(function(engineerAnswers){
+            const engineer = new Engineer(engineerAnswers.name, engineerAnswers.id, engineerAnswers.email, engineerAnswers.github);
+            employees.push(engineer);
+            makeNewEmployees()
+        });
+
+    } else if (typeAnswers.type === "Intern"){
+        inquirer.prompt([{
+            type: "input", 
+            message: "Name of intern", 
+            name: "name", 
+            default: "Jam"
+        }, 
+        {
+            type: "input", 
+            message: "interns ID ", 
+            name: "id", 
+            default: "1",
+        },
+        {
+            type: "input", 
+            message: "interns email", 
+            name: "email", 
+            default: "@gmail.com"
+        },
+        {
+            type: "input", 
+            message: "interns school", 
+            name: "school", 
+            default: "school"
+
+                }]).then(function(internAnswers){
+                const intern = new Intern(internAnswers.name, internAnswers.id, internAnswers.email, internAnswers.school);
+                employees.push(intern);
+                makeNewEmployees()
+         });
+        } else {
+            const html = render(employees); 
+            fs.writefile(outputPath, html, function(err){
+                if (err)
+                    throw err; 
+                    console.log("working"); 
+                });
+            }
+        
+       
+       });
+       }
+
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
