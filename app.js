@@ -5,6 +5,7 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
@@ -133,7 +134,7 @@ inquirer.prompt([{
         
           } else {
             const html = render(employees); 
-            fs.writefile(outputPath, html, function(err){
+            fs.writeFileSync(outputPath, html, function(err){
                 if (err)
                     throw err; 
                     console.log("working"); 
